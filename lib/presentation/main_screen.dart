@@ -18,7 +18,6 @@ class _MainScreenState extends State<MainScreen> {
 
   StreamSubscription<MainEvent>? _subscription;
 
-
   @override
   void initState() {
     super.initState();
@@ -68,24 +67,37 @@ class _MainScreenState extends State<MainScreen> {
           state.isLoading
               ? const CircularProgressIndicator()
               : Expanded(
-                child: ListView.builder(
-              itemCount: state.imageItems.length,
-              itemBuilder: (context, index) {
-                final imageItem = state.imageItems[index];
-                return GestureDetector(
-                  onTap: () {
-                    context.push('/detail', extra: imageItem);
-                  },
-                  child: Image.network(
-                    imageItem.imageUrl,
-                    width: 100,
-                    height: 100,
-                    fit: BoxFit.cover,
+                  child: GridView.builder(
+                    itemCount: state.imageItems.length,
+                    itemBuilder: (context, index) {
+                      final imageItem = state.imageItems[index];
+                      return GestureDetector(
+                        onTap: () {
+                          context.push('/detail', extra: imageItem);
+                        },
+
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(16),
+                            child: Image.network(
+                              imageItem.imageUrl,
+                              width: MediaQuery.of(context).size.width * 0.1,
+                              height: MediaQuery.of(context).size.height * 0.1,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 28,
+                      mainAxisSpacing: 28,
+                    ),
                   ),
-                );
-              },
-            ),
-          ),
+                ),
         ],
       ),
     );
