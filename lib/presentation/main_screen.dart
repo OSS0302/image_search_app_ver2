@@ -26,6 +26,11 @@ class _MainScreenState extends State<MainScreen> {
       final viewModel = context.read<MainViewModel>();
       _subscription = viewModel.eventStream.listen((event) {
         switch (event) {
+          case ShowSnackBar():
+            final snackBar = SnackBar(
+              content: Text(event.message),
+            );
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
           case DataLoadingError():
             const snackBar = SnackBar(
               content: Text('데이터가 오지 않았습니다.'),

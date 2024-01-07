@@ -37,6 +37,7 @@ class MainViewModel extends ChangeNotifier {
 
         );
         notifyListeners();
+        _eventController.add(MainEvent.showSnackBar('이미지 를 가져왔습니다.!'));
       case Error<List<ImageItem>>():
         _state = state.copyWith(
           isLoading: false,
