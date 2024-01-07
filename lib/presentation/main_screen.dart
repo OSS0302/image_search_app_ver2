@@ -55,30 +55,77 @@ class _MainScreenState extends State<MainScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('이미지 검색 앱'),
-        actions: [
-          IconButton(
-            onPressed: () {
-              viewModel.fetchImages(_textController.text);
-            },
-            icon: const Icon(Icons.search),
-          ),
-        ],
+        // actions: [
+        //   IconButton(
+        //     onPressed: () {
+        //       viewModel.fetchImages(_textController.text);
+        //     },
+        //     icon: const Icon(Icons.search),
+        //   ),
+        // ],
       ),
       body: Column(
         children: [
           TextField(
+            decoration: InputDecoration(
+                suffixIcon: IconButton(
+                    icon: Icon(Icons.search),
+                    onPressed: () {
+                      FocusScope.of(context).unfocus();
+                      viewModel.fetchImages(_textController.text);
+                    },
+                ),
+            ),
+            onSubmitted: (value){
+              FocusScope.of(context).unfocus();
+              viewModel.fetchImages(value);
+            },
             controller: _textController,
           ),
           state.isLoading
-              ? const CircularProgressIndicator()
+              ? Expanded(
+                child: const Center(
+                child: CircularProgressIndicator(),
+                          ),
+              )
               : Expanded(
                   child: GridView.builder(
                     itemCount: state.imageItems.length,
                     itemBuilder: (context, index) {
                       final imageItem = state.imageItems[index];
                       return GestureDetector(
-                        onTap: () {
-                          context.push('/detail', extra: imageItem);
+                        onTap: () async {
+
+                          await showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  content: Text( '자세한화면을 보시겠습니까?.'),
+                                  actions: [
+                                    TextButton(
+                                        onPressed: (){
+                                          context.pop();
+
+                                        },
+                                        child: Text('닫기'),
+                                    ),
+                                    TextButton(
+                                      onPressed: (){
+                                        context.pop(true);
+                                        context.push('/detail', extra: imageItem);
+
+                                      },
+                                      child: Text('확인'),
+                                    ),
+                                  ],
+                                );
+                              },
+                          ).then((value) {
+                            if(value != null && value){
+                              print('오카이!');
+                            }
+                          });
+
                         },
 
                         child: Padding(
