@@ -2,8 +2,8 @@ import 'package:go_router/go_router.dart';
 import 'package:image_search_app_ver2/di/di_setup.dart';
 import 'package:image_search_app_ver2/domain/model/image_item.dart';
 import 'package:image_search_app_ver2/presentation/main_screen.dart';
-import 'package:image_search_app_ver2/presentation/main_view_model.dart';
-import 'package:image_search_app_ver2/ui/detail_screen/detail_screen.dart';
+import 'package:image_search_app_ver2/presentation/main_veiw_model.dart';
+import 'package:image_search_app_ver2/ui/detail_screen/detail_sceen.dart';
 import 'package:provider/provider.dart';
 
 final router = GoRouter(
