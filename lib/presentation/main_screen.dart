@@ -3,8 +3,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_search_app_ver2/presentation/main_event.dart';
-import 'package:image_search_app_ver2/presentation/main_view_model.dart';
 import 'package:provider/provider.dart';
+
+import 'main_veiw_model.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -55,39 +56,31 @@ class _MainScreenState extends State<MainScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('이미지 검색 앱'),
-        // actions: [
-        //   IconButton(
-        //     onPressed: () {
-        //       viewModel.fetchImages(_textController.text);
-        //     },
-        //     icon: const Icon(Icons.search),
-        //   ),
-        // ],
       ),
       body: Column(
         children: [
           TextField(
             decoration: InputDecoration(
-                suffixIcon: IconButton(
-                    icon: Icon(Icons.search),
-                    onPressed: () {
-                      FocusScope.of(context).unfocus();
-                      viewModel.fetchImages(_textController.text);
-                    },
-                ),
+              suffixIcon: IconButton(
+                icon: const Icon(Icons.search),
+                onPressed: () {
+                  FocusScope.of(context).unfocus();
+                  viewModel.fetchImages(_textController.text);
+                },
+              ),
             ),
-            onSubmitted: (value){
+            onSubmitted: (value) {
               FocusScope.of(context).unfocus();
               viewModel.fetchImages(value);
             },
             controller: _textController,
           ),
           state.isLoading
-              ? Expanded(
-                child: const Center(
-                child: CircularProgressIndicator(),
-                          ),
-              )
+              ? const Expanded(
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                )
               : Expanded(
                   child: GridView.builder(
                     itemCount: state.imageItems.length,
@@ -95,39 +88,34 @@ class _MainScreenState extends State<MainScreen> {
                       final imageItem = state.imageItems[index];
                       return GestureDetector(
                         onTap: () async {
-
                           await showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return AlertDialog(
-                                  content: Text( '자세한화면을 보시겠습니까?.'),
-                                  actions: [
-                                    TextButton(
-                                        onPressed: (){
-                                          context.pop();
-
-                                        },
-                                        child: Text('닫기'),
-                                    ),
-                                    TextButton(
-                                      onPressed: (){
-                                        context.pop(true);
-                                        context.push('/detail', extra: imageItem);
-
-                                      },
-                                      child: Text('확인'),
-                                    ),
-                                  ],
-                                );
-                              },
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                content: const Text('자세한화면을 보시겠습니까?.'),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () {
+                                      context.pop();
+                                    },
+                                    child: const Text('닫기'),
+                                  ),
+                                  TextButton(
+                                    onPressed: () {
+                                      context.pop(true);
+                                      context.push('/detail', extra: imageItem);
+                                    },
+                                    child: const Text('확인'),
+                                  ),
+                                ],
+                              );
+                            },
                           ).then((value) {
-                            if(value != null && value){
+                            if (value != null && value) {
                               print('오카이!');
                             }
                           });
-
                         },
-
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: ClipRRect(

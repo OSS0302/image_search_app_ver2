@@ -13,6 +13,6 @@ class MainState with _$MainState {
     @Default(false) bool isLoading,
 
   }) = _MainState;
-  
-  factory MainState.fromJson(Map<String, Object?> json) => _$MainStateFromJson(json); 
+
+  factory MainState.fromJson(Map<String, Object?> json) => _$MainStateFromJson(json);
 }
