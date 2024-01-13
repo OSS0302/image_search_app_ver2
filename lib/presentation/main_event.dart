@@ -4,6 +4,6 @@ part 'main_event.freezed.dart';
 
 @freezed
 sealed class MainEvent<T> with _$MainEvent<T> {
-  const factory MainEvent.dataLoadingError() = DataLoadingError;
   const factory MainEvent.showSnackBar(String message) = ShowSnackBar;
+  const factory MainEvent.dataLoadingError() = DataLoadingError;
 }

@@ -13,14 +13,11 @@ class DetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(imageItem.tags),
+        title: const Text('이미지'),
       ),
       body: Hero(
         tag: imageItem.id,
-        child: Image.network(
-          imageItem.imageUrl,
-          fit: BoxFit.cover,
-        ),
+        child: Image.network(imageItem.imageUrl,fit: BoxFit.cover,),
       ),
     );
   }

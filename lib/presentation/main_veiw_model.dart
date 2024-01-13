@@ -1,12 +1,12 @@
+
 import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:image_search_app_ver2/core/result.dart';
-import 'package:image_search_app_ver2/data/repository/image_item_repository.dart';
 import 'package:image_search_app_ver2/domain/model/image_item.dart';
+import 'package:image_search_app_ver2/domain/repository/image_item_repository.dart';
+import 'package:image_search_app_ver2/presentation/main_event.dart';
 import 'package:image_search_app_ver2/presentation/main_state.dart';
-
-import 'main_event.dart';
 
 class MainViewModel extends ChangeNotifier {
 

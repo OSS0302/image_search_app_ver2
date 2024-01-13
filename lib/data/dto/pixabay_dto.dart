@@ -1,11 +1,11 @@
-class ImageDto {
-  ImageDto({
+class PixabayDto {
+  PixabayDto({
     this.total,
     this.totalHits,
     this.hits,
   });
 
-  ImageDto.fromJson(dynamic json) {
+  PixabayDto.fromJson(dynamic json) {
     total = json['total'];
     totalHits = json['totalHits'];
     if (json['hits'] != null) {
