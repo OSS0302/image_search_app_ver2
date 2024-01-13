@@ -6,7 +6,6 @@ import 'package:image_search_app_ver2/presentation/main_event.dart';
 import 'package:provider/provider.dart';
 
 import 'main_veiw_model.dart';
-
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
 
@@ -77,67 +76,66 @@ class _MainScreenState extends State<MainScreen> {
           ),
           state.isLoading
               ? const Expanded(
-                  child: Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                )
+            child: Center(
+              child: CircularProgressIndicator(),
+            ),
+          )
               : Expanded(
-                  child: GridView.builder(
-                    itemCount: state.imageItems.length,
-                    itemBuilder: (context, index) {
-                      final imageItem = state.imageItems[index];
-                      return GestureDetector(
-                        onTap: () async {
-                          await showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return AlertDialog(
-                                content: const Text('자세한화면을 보시겠습니까?.'),
-                                actions: [
-                                  TextButton(
-                                    onPressed: () {
-                                      context.pop();
-                                    },
-                                    child: const Text('닫기'),
-                                  ),
-                                  TextButton(
-                                    onPressed: () {
-                                      context.pop(true);
-                                      context.push('/detail', extra: imageItem);
-                                    },
-                                    child: const Text('확인'),
-                                  ),
-                                ],
-                              );
-                            },
-                          ).then((value) {
-                            if (value != null && value) {
-                              print('오카이!');
-                            }
-                          });
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(16),
-                            child: Image.network(
-                              imageItem.imageUrl,
-                              width: MediaQuery.of(context).size.width * 0.1,
-                              height: MediaQuery.of(context).size.height * 0.1,
-                              fit: BoxFit.cover,
+            child: GridView.builder(
+              itemCount: state.imageItems.length,
+              itemBuilder: (context, index) {
+                final imageItem = state.imageItems[index];
+                return GestureDetector(
+                  onTap: () async {
+                    await showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          content: const Text('자세한화면을 보시겠습니까?.'),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                context.pop();
+                              },
+                              child: const Text('닫기'),
                             ),
-                          ),
-                        ),
-                      );
-                    },
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 28,
-                      mainAxisSpacing: 28,
+                            TextButton(
+                              onPressed: () {
+                                context.pop(true);
+                                context.push('/detail', extra: imageItem);
+                              },
+                              child: const Text('확인'),
+                            ),
+                          ],
+                        );
+                      },
+                    ).then((value) {
+                      if (value != null && value) {
+                      }
+                    });
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(16),
+                      child: Image.network(
+                        imageItem.imageUrl,
+                        width: MediaQuery.of(context).size.width * 0.1,
+                        height: MediaQuery.of(context).size.height * 0.1,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
-                ),
+                );
+              },
+              gridDelegate:
+              const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: 28,
+                mainAxisSpacing: 28,
+              ),
+            ),
+          ),
         ],
       ),
     );
