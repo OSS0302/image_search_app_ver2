@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:image_search_app_ver2/di/di_setup.dart';
-import 'package:image_search_app_ver2/ui/routes.dart';
-
-
+import 'package:image_search_app_ver2/persentation/routeus.dart';
 
 void main() {
   diSetup();
