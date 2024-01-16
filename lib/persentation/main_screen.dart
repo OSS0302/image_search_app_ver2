@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:image_search_app_ver2/presentation/main_event.dart';
+import 'package:image_search_app_ver2/persentation/main_event.dart';
 import 'package:provider/provider.dart';
 
 import 'main_veiw_model.dart';
@@ -31,7 +31,7 @@ class _MainScreenState extends State<MainScreen> {
               content: Text(event.message),
             );
             ScaffoldMessenger.of(context).showSnackBar(snackBar);
-          case DataLoadingError():
+          case LoadingError():
             const snackBar = SnackBar(
               content: Text('데이터가 오지 않았습니다.'),
             );
@@ -64,13 +64,13 @@ class _MainScreenState extends State<MainScreen> {
                 icon: const Icon(Icons.search),
                 onPressed: () {
                   FocusScope.of(context).unfocus();
-                  viewModel.fetchImages(_textController.text);
+                  viewModel.fetchImage(_textController.text);
                 },
               ),
             ),
             onSubmitted: (value) {
               FocusScope.of(context).unfocus();
-              viewModel.fetchImages(value);
+              viewModel.fetchImage(value);
             },
             controller: _textController,
           ),
@@ -82,9 +82,9 @@ class _MainScreenState extends State<MainScreen> {
           )
               : Expanded(
             child: GridView.builder(
-              itemCount: state.imageItems.length,
+              itemCount: state.imageItem.length,
               itemBuilder: (context, index) {
-                final imageItem = state.imageItems[index];
+                final imageItem = state.imageItem[index];
                 return GestureDetector(
                   onTap: () async {
                     await showDialog(
