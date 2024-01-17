@@ -2,11 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:image_search_app_ver2/core/result.dart';
-import 'package:image_search_app_ver2/domain/image_item.dart';
+import 'package:image_search_app_ver2/domain/model/image_item.dart';
 import 'package:image_search_app_ver2/domain/repository/image_repository.dart';
-import 'package:image_search_app_ver2/persentation/main_state.dart';
-
-import 'main_event.dart';
+import 'package:image_search_app_ver2/presentation/maim/main_event.dart';
+import 'package:image_search_app_ver2/presentation/maim/main_state.dart';
 
 class MainViewModel extends ChangeNotifier {
   final ImageRepository _imageRepository;
@@ -23,27 +22,27 @@ class MainViewModel extends ChangeNotifier {
 
   Stream<MainEvent> get eventStream => _eventController.stream;
 
-  Future<void> fetchImage(String query) async {
-    _state = state.copyWith(isLoading: true);
+  Future<void> fetchImages(String query) async {
+    _state = state.copyWith(
+      isLoading: true,
+    );
     notifyListeners();
 
-    final result = await _imageRepository.getImageItems(query);
-
+    final result = await _imageRepository.getImageResult(query);
     switch (result) {
       case Success<List<ImageItem>>():
         _state = state.copyWith(
           isLoading: false,
           imageItem: result.data,
         );
-        notifyListeners();
-        _eventController.add(const MainEvent.showSnackBar('이미지 가져오기 성공2'));
+          _eventController.add(const MainEvent.showSnackBar('나온다'));
       case Error<List<ImageItem>>():
-        _state = state.copyWith(
-          isLoading: false,
-          imageItem: [],
-        );
-        notifyListeners();
-        _eventController.add(const MainEvent.LoadingError());
+      _state = state.copyWith(
+        isLoading: false,
+        imageItem: [],
+      );
     }
+    notifyListeners();
+    _eventController.add(const MainEvent.loadingError());
   }
 }
