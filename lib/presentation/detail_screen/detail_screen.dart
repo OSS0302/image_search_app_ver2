@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:image_search_app_ver2/domain/image_item.dart';
+import 'package:flutter/widgets.dart';
+import 'package:image_search_app_ver2/domain/model/image_item.dart';
 
-class DetailScreen extends StatelessWidget {
+class DetailScreen extends StatelessWidget{
   final ImageItem imageItem;
 
-  const DetailScreen({
-    super.key,
+  DetailScreen({
     required this.imageItem,
   });
 

@@ -1,9 +1,8 @@
 class ImageDto {
   ImageDto({
-    this.total,
-    this.totalHits,
-    this.hits,
-  });
+      this.total, 
+      this.totalHits, 
+      this.hits,});
 
   ImageDto.fromJson(dynamic json) {
     total = json['total'];
@@ -15,7 +14,6 @@ class ImageDto {
       });
     }
   }
-
   num? total;
   num? totalHits;
   List<Hits>? hits;
@@ -29,33 +27,33 @@ class ImageDto {
     }
     return map;
   }
+
 }
 
 class Hits {
   Hits({
-    this.id,
-    this.pageURL,
-    this.type,
-    this.tags,
-    this.previewURL,
-    this.previewWidth,
-    this.previewHeight,
-    this.webformatURL,
-    this.webformatWidth,
-    this.webformatHeight,
-    this.largeImageURL,
-    this.imageWidth,
-    this.imageHeight,
-    this.imageSize,
-    this.views,
-    this.downloads,
-    this.collections,
-    this.likes,
-    this.comments,
-    this.userId,
-    this.user,
-    this.userImageURL,
-  });
+      this.id, 
+      this.pageURL, 
+      this.type, 
+      this.tags, 
+      this.previewURL, 
+      this.previewWidth, 
+      this.previewHeight, 
+      this.webformatURL, 
+      this.webformatWidth, 
+      this.webformatHeight, 
+      this.largeImageURL, 
+      this.imageWidth, 
+      this.imageHeight, 
+      this.imageSize, 
+      this.views, 
+      this.downloads, 
+      this.collections, 
+      this.likes, 
+      this.comments, 
+      this.userId, 
+      this.user, 
+      this.userImageURL,});
 
   Hits.fromJson(dynamic json) {
     id = json['id'];
@@ -81,7 +79,6 @@ class Hits {
     user = json['user'];
     userImageURL = json['userImageURL'];
   }
-
   num? id;
   String? pageURL;
   String? type;
@@ -131,4 +128,5 @@ class Hits {
     map['userImageURL'] = userImageURL;
     return map;
   }
+
 }

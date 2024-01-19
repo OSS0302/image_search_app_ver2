@@ -2,10 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:image_search_app_ver2/persentation/main_event.dart';
+import 'package:image_search_app_ver2/presentation/maim/main_event.dart';
+import 'package:image_search_app_ver2/presentation/maim/main_view_model.dart';
 import 'package:provider/provider.dart';
 
-import 'main_veiw_model.dart';
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
 
@@ -64,13 +64,13 @@ class _MainScreenState extends State<MainScreen> {
                 icon: const Icon(Icons.search),
                 onPressed: () {
                   FocusScope.of(context).unfocus();
-                  viewModel.fetchImage(_textController.text);
+                  viewModel.fetchImages(_textController.text);
                 },
               ),
             ),
             onSubmitted: (value) {
               FocusScope.of(context).unfocus();
-              viewModel.fetchImage(value);
+              viewModel.fetchImages(value);
             },
             controller: _textController,
           ),
